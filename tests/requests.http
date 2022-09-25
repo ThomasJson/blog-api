@@ -1,0 +1,28 @@
+@table = appuser
+@id = 1
+@body = {"with": ["account", "role", "article", "comment", "theme", "appuser"]}
+
+GET http://blog-api.loc/appuser/
+
+###
+GET http://blog-api.loc/tag/{{id}}
+
+###
+POST http://blog-api.loc/theme/1
+Content-Type: application/json
+// Il faut préciser qu’on envoi du json avec Content-Type: application/json, 
+// et ajouter la variable body qui contient les valeur à insérer ou mettre à jour en DB
+
+{{body}}
+
+###
+PUT http://blog-api.loc/{{table}}/{{id}}
+Content-Type: application/json
+
+{{body}}
+
+###
+PATCH http://blog-api.loc/tag/{{id}}
+
+###
+DELETE http://blog-api.loc/tag/{{id}}
