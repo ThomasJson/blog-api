@@ -15,5 +15,23 @@
             });
             $row->theme = count($themes) == 1 ? array_shift($themes) : null;
         }
+
+        if (isset($sub_rows['comment'])) {
+            $comments = array_filter($sub_rows['comment'], function ($item) use ($row) {
+                return $item->Id_article == $row->Id_article;
+            });
+            if (isset($comments)) {
+                $row->comments_list = $comments;
+            }
+        }
+
+        if (isset($sub_rows['image'])) {
+            $images = array_filter($sub_rows['image'], function ($item) use ($row) {
+                return $item->Id_article == $row->Id_article;
+            });
+            if (isset($images)) {
+                $row->images_list = $images;
+            }
+        }
     }
 }?>

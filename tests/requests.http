@@ -8,7 +8,7 @@ GET http://blog-api.loc/appuser/
 GET http://blog-api.loc/tag/{{id}}
 
 ###
-POST http://blog-api.loc/theme/1
+POST http://blog-api.loc/article/2
 Content-Type: application/json
 // Il faut préciser qu’on envoi du json avec Content-Type: application/json, 
 // et ajouter la variable body qui contient les valeur à insérer ou mettre à jour en DB
