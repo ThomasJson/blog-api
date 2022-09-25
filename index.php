@@ -9,6 +9,7 @@ header("Access-Control-Allow-Origin: http://localhost:3000");
 $_ENV["current"] = "dev";
 $config = file_get_contents("configs/" . $_ENV["current"] . ".config.json");
 $_ENV['config'] = json_decode($config);
+
 //
 // Import de la classe DatabaseService, DatabaseController //
 require_once 'services/database.service.php';
