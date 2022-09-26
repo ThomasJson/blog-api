@@ -1,6 +1,11 @@
 @table = appuser
 @id = 1
-@body = {"with": ["account", "role", "article", "comment", "theme", "appuser"]}
+
+// Nous allons ajouter les tags correspondant à un article dans ArticleDetailScreen
+// Il s'agit d’une relation ManyToMany, la correspondance entre les tags et les articles
+// se fait dans une table intermédiaire : article_tag
+
+@body = {"with": ["account", "role", "article", "comment", "theme", "appuser", {"tag":"article_tag"}]}
 
 GET http://blog-api.loc/appuser/
 
