@@ -7,10 +7,10 @@
 
 @body = {"with": ["account", "role", {"article":"article_tag"}, "comment", "theme", "appuser", {"tag":"article_tag"}]}
 
-GET http://blog-api.loc/tag/
+GET http://blog-api.loc/themeDetail/2
 
 ###
-GET http://blog-api.loc/tag/{{id}}
+GET http://blog-api.loc/themeDetail/{{id}}
 
 ###
 POST http://blog-api.loc/tag/35
