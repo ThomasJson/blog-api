@@ -48,29 +48,33 @@ class DatabaseService
     // de l’exécution de la requête 
     // ainsi que le statment 
     // pour accéder aux info renvoyées par la requête SQL
-    public function query($sql, $params)
+    public function query($sql, $params = [])
     {
         $statment = $this->connect()->prepare($sql);
         $result = $statment->execute($params);
-        return (object)['result' => $result, 'statement' => $statment];
+        return (object)['result' => $result, 'statment' => $statment];
     }
-
-    // Recup toutes les lignes d'une table
-    public function selectAll()
+    public function selectAll($is_deleted = 0)
     {
         $sql = "SELECT * FROM $this->table WHERE is_deleted = ?";
-        $resp = $this->query($sql, [0]);
-        $rows = $resp->statement->fetchAll(PDO::FETCH_CLASS);
+        $resp = $this->query($sql, [$is_deleted]);
+        $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
         return $rows;
     }
 
-    // Recup la ligne d'un id
+    public function selectWhere($where = "1", $params = [])
+    {
+        $sql = "SELECT * FROM $this->table WHERE $where;";
+        $resp = $this->query($sql, $params);
+        $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
+        return $rows;
+    }
+
     public function selectOne($id)
     {
-        $sql = "SELECT * FROM $this->table WHERE is_deleted = ? AND
-        Id_$this->table = ?";
+        $sql = "SELECT * FROM $this->table WHERE is_deleted = ? AND Id_$this->table = ?";
         $resp = $this->query($sql, [0, $id]);
-        $rows = $resp->statement->fetchAll(PDO::FETCH_CLASS);
+        $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
         $row = $resp->result && count($rows) == 1 ? $rows[0] : null;
         return $row;
     }
