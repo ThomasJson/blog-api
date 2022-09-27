@@ -78,4 +78,13 @@ class DatabaseService
         $row = $resp->result && count($rows) == 1 ? $rows[0] : null;
         return $row;
     }
+
+    function insertOne($body = []) {
+
+        // $columns = 
+        // $values = 
+        $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
+        $resp = $this->query($sql, [$values]);
+        $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
+    }
 }

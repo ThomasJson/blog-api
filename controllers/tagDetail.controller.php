@@ -1,4 +1,4 @@
-<?php class ThemeDetailController {
+<?php class TagDetailController {
     public function __construct($params)
     {
         $id = array_shift($params);
@@ -11,13 +11,14 @@
         }
     }
     public function getData($id) {
-        require_once 'theme.controller.php';
-        $themeCtrl = new ThemeController([$id]);
-        $row = $themeCtrl->getOneWith($id, ["article"]);
-        
+        require_once 'tag.controller.php';
+        $tagCtrl = new TagController([$id]);
+        $row = $tagCtrl->getOneWith($id, ["image"]);
+
         require_once 'article.controller.php';
         $articleCtrl = new ArticleController([]);
-        $articles = $articleCtrl->getAllWith(["appuser"]);
+        $articles = $articleCtrl->getAllWith(["article"]);
+
         foreach($row->articles_list as &$article){
             $filtered_articles = array_values(array_filter($articles,
             function($item) use ($article){
