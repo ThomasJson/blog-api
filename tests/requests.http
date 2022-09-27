@@ -1,19 +1,21 @@
-@table = appuser
+@table = tag
 @id = 1
 
 // Nous allons ajouter les tags correspondant à un article dans ArticleDetailScreen
 // Il s'agit d’une relation ManyToMany, la correspondance entre les tags et les articles
 // se fait dans une table intermédiaire : article_tag
 
-@body = {"with": ["account", "role", {"article":"article_tag"}, "comment", "theme", "appuser", {"tag":"article_tag"}]}
+@body = {"title":"titre de la nouvelle ligne", "is_deleted" = 0}
 
-GET http://blog-api.loc/themeDetail/2
+# {"with": ["account", "role", {"article":"article_tag"}, "comment", "theme", "appuser", {"tag":"article_tag"}]}
+
+GET http://blog-api.loc/tag
 
 ###
-GET http://blog-api.loc/themeDetail/{{id}}
+GET http://blog-api.loc/tagDetail/{{id}}
 
 ###
-POST http://blog-api.loc/tag/35
+POST http://blog-api.loc/{{table}}
 Content-Type: application/json
 // Il faut préciser qu’on envoi du json avec Content-Type: application/json, 
 // et ajouter la variable body qui contient les valeur à insérer ou mettre à jour en DB

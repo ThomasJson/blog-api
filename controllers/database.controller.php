@@ -142,12 +142,15 @@ abstract class DatabaseController
         return $row;
     }
 
-    //TODO Insert ($this->table) somewhere
     public function create()
     {
-        return "Insert a new row in table theme with values : " .
-            urldecode(http_build_query($this->body, '', ', '));
+        // return "Insert a new row in table theme with values : " .
+        //     urldecode(http_build_query($this->body, '', ', '));
+        $dbs = new DatabaseService($this->table);
+        $row = $dbs->insertOne($this->body);
+        return $row;
     }
+
     public function update($id)
     {
         return "Update row with id = $id in table theme with values : " .
