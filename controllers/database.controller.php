@@ -144,11 +144,11 @@ abstract class DatabaseController
 
     public function create()
     {
-        // return "Insert a new row in table theme with values : " .
-        //     urldecode(http_build_query($this->body, '', ', '));
-        $dbs = new DatabaseService($this->table);
-        $row = $dbs->insertOne($this->body);
-        return $row;
+        return "Insert a new row in table theme with values : " .
+            urldecode(http_build_query($this->body, '', ', '));
+        // $dbs = new DatabaseService($this->table);
+        // $row = $dbs->insertOne($this->body);
+        // return $row;
     }
 
     public function update($id)

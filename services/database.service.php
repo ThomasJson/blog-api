@@ -79,12 +79,15 @@ class DatabaseService
         return $row;
     }
 
-    function insertOne($body = []) {
+    // function insertOne($body = []) {
 
-        // $columns = 
-        // $values = 
-        $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
-        $resp = $this->query($sql, [$values]);
-        $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
-    }
+        
+
+    //     // $columns = 
+    //     // $values = json_decode($body);
+    //     $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
+
+    //     $resp = $this->query($sql, [$values]);
+    //     $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
+    // }
 }
