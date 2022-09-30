@@ -79,15 +79,44 @@ class DatabaseService
         return $row;
     }
 
-    // function insertOne($body = []) {
-
-        
-
-    //     // $columns = 
-    //     // $values = json_decode($body);
+    // function insertOne($body = []){ // TODO insertMany
+    //     $columns = "";
+    //     $values = "";
+    //     if(isset($fields["Id_$this->table"])){
+    //         unset($fields["Id_$this->table"]);
+    //     }
+    //     $valuesToBind = array();
+    //     foreach ($body as $k => $v) {
+    //         $columns .= $k . ",";
+    //         $values .= "?,";
+    //         array_push($valuesToBind, $v);
+    //     }
+    //     $columns = trim($columns, ',');
+    //     $values = trim($values, ',');
     //     $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
-
-    //     $resp = $this->query($sql, [$values]);
-    //     $rows = $resp->statment->fetchAll(PDO::FETCH_CLASS);
+    //     $resp = $this->query($sql, $valuesToBind);
+    //     if($resp->result && $resp->statment->rowCount() == 1){
+    //         $insertedId = self::$connection->lastInsertId();
+    //         $row = $this->selectOne($insertedId);
+    //         return $row;
+    //     }
+    //     return false;
     // }
+
+    public function insertOne($body = []){ //Version condensée
+        if(isset($body["Id_$this->table"])){
+            unset($body["Id_$this->table"]);
+        }
+        $columns = implode(",", array_keys($body));
+        $values = implode(",", array_map(function (){ return "?"; },$body));
+        $valuesToBind = array_values($body);
+        $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
+        $resp = $this->query($sql, $valuesToBind);
+        if($resp->result && $resp->statment->rowCount() == 1){
+            $insertedId = self::$connection->lastInsertId();
+            $row = $this->selectOne($insertedId);
+            return $row;
+        }
+        return false;
+    }
 }
