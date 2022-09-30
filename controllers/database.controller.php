@@ -146,8 +146,6 @@ abstract class DatabaseController
     {
         // return "Insert a new row in table theme with values : " .
         //     urldecode(http_build_query($this->body, '', ', '));
-        $body = $this->body;
-        $table = $this->table;
         
         $dbs = new DatabaseService($this->table);
         $row = $dbs->insertOne($this->body);
